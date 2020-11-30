@@ -5,6 +5,10 @@ class Api::V1::UsersController < ApplicationController
     @users = User.all
   end
 
+  def show
+    render json: @user
+  end
+
   def create
     @user = User.create(user_params)
     # byebug
@@ -16,7 +20,21 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  private
+  def update
+    @user.update(user_params)
+    render json: @user
+  end
+
+  def destroy
+    @user.destroy
+  end
+  
+  private 
+  
+  def find_user
+    @user = User.find(params[:id])
+  end
+
   def user_params
     params.require(:user).permit(:name, :password, :email_address)
   end
