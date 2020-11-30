@@ -1,3 +1,3 @@
 class JournalSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :title, :entry, :date, :user_id
 end
