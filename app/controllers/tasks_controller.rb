@@ -1,5 +1,0 @@
-class TasksController < ApplicationController
-  
-end
-
-

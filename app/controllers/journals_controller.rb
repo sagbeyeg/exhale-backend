@@ -1,3 +1,0 @@
-class JournalsController < ApplicationController
-  
-end
