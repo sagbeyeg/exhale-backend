@@ -1,10 +1,13 @@
 class Api::V1::UsersController < ApplicationController
   skip_before_action :authorized, only: [:create, :index, :show]
+  before_action :find_user, except: [:create, :index, :profile]
+
+  def profile
+    render json: {user: current_user }, status: :accepted
+  end 
 
   def index
-   
     @user = User.all
-
     render json: @user 
   end
 
