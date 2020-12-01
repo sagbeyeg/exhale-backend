@@ -35,7 +35,7 @@ puts "🍝 Seeding users..."
     Journal.create!(
       title: Faker::TvShows::RickAndMorty.location,
       entry: Faker::TvShows::RickAndMorty.quote,
-      date: Faker::Date.in_date_period,
+      date: Faker::Time.backward(days: 50, period: :all, format: :long),
       user_id: user.id,
     )
   end
