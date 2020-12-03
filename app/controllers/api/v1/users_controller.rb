@@ -3,6 +3,7 @@ class Api::V1::UsersController < ApplicationController
   before_action :find_user, except: [:create, :index, :profile]
 
   def profile
+    byebug
     render json: {user: current_user }, status: :accepted
   end 
 
