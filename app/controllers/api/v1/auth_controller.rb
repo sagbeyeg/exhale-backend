@@ -28,29 +28,29 @@ class Api::V1::AuthController < ApplicationController
 # end
 
 # OUR ORIGINAL CREATE METHOD
-def create
-  # byebug
-  @user = User.find_by(email_address: user_params[:email_address])
-  if @user.valid?
-    @token = encode_token({ user_id: @user.id })
-    render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
-  else
-    render json: { error: 'failed to create user' }, status: :not_acceptable
-  end
-end
+# def create
+#   # byebug
+#   @user = User.find_by(email_address: user_params[:email_address])
+#   if @user.valid?
+#     @token = encode_token({ user_id: @user.id })
+#     render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
+#   else
+#     render json: { error: 'failed to create user' }, status: :not_acceptable
+#   end
+# end
 
   #ANNIE'S EDIT, CHANGING user_parms to params(line #44)
-  # def create
-  #   # byebug
-  #   @user = User.find_by(email_address: params[:email_address])
-  #   byebug
-  #   if @user.valid?
-  #     @token = encode_token({ user_id: @user.id })
-  #     render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
-  #   else
-  #     render json: { error: 'failed to create user' }, status: :not_acceptable
-  #   end
-  # end
+  def create
+    # byebug
+    @user = User.find_by(email_address: params[:email_address])
+    # byebug
+    if @user.valid?
+      @token = encode_token({ user_id: @user.id })
+      render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
+    else
+      render json: { error: 'failed to create user' }, status: :not_acceptable
+    end
+  end
 
   private
 
