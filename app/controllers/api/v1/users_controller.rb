@@ -1,8 +1,9 @@
 class Api::V1::UsersController < ApplicationController
-  skip_before_action :authorized, only: [:create, :index, :show]
-  before_action :find_user, except: [:create, :index, :profile]
+  # skip_before_action :authorized, only: [:create, :index, :show]
+  before_action :find_user, except: [:create, :index, :profile, :login]
 
   def profile
+    # byebug
     render json: {user: current_user }, status: :accepted
   end 
 
@@ -20,7 +21,7 @@ class Api::V1::UsersController < ApplicationController
     # byebug
     if @user.valid?
       @token = encode_token(user_id: @user.id)
-      render json: { user: UserSerializer.new(@user), jwt: @token }, status: :created
+      render json: { user: UserSerializer.new(@user), jwt: @token}, status: :created
     else
       render json: { error: 'failed to create user' }, status: :not_acceptable
     end
@@ -33,6 +34,16 @@ class Api::V1::UsersController < ApplicationController
 
   def destroy
     @user.destroy
+  end
+
+  def login
+    # byebug
+    @user = User.find_by(email_address: params[:email_address])
+    if @user.valid?
+      render json: { user: UserSerializer.new(@user)}
+    else
+      render json: { error: 'failed to login user' }
+    end
   end
   
   private 

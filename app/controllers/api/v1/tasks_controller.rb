@@ -10,16 +10,17 @@ class Api::V1::TasksController < ApplicationController
     end
   
     def create
-      @task = Task.create(task_params)
+      # byebug
+      @task = Task.create(tasks_params)
       if @task.valid?
-        render json: { task: TaskSerializer.new(@task)}, status: :created
+        render json: { task: TaskSerializer.new(@task)}
       else
-        render json: { error: 'failed to create task' }, status: :not_acceptable
+        render json: { error: 'failed to create task' }
       end
     end
   
     def update
-      @task.update(task_params)
+      @task.update(tasks_params)
       render json: @task
     end
   
@@ -34,8 +35,7 @@ class Api::V1::TasksController < ApplicationController
     end
   
     def tasks_params
-        params.require(:task).permit(:title, :status, :content, :user_id)
-      end
+      params.require(:task).permit(:title, :status, :content, :user_id)
     end
 
 end

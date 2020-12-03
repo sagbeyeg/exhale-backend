@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :tasks 
       post '/login', to: 'auth#create'
       get '/profile', to: 'users#profile'
+      get '/by_email/:email_address', to: 'users#login'
     end
   end
 
