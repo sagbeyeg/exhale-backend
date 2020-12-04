@@ -3,6 +3,7 @@ class Api::V1::TasksController < ApplicationController
 
     def index 
       @tasks = Task.all
+      render json: @tasks 
     end 
 
     def show
@@ -35,7 +36,7 @@ class Api::V1::TasksController < ApplicationController
     end
   
     def tasks_params
-      params.require(:task).permit(:title, :status, :content, :user_id)
+      params.permit(:title, :status, :content, :user_id)
     end
 
 end

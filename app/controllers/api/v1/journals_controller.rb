@@ -3,6 +3,7 @@ class Api::V1::JournalsController < ApplicationController
   
   def index
     @journals = Journal.all
+    render json: @journals 
   end
 
   def show
@@ -19,6 +20,7 @@ class Api::V1::JournalsController < ApplicationController
   end
 
   def update
+    byebug
     @journal.update(journal_params)
     render json: @journal
   end
@@ -34,6 +36,6 @@ class Api::V1::JournalsController < ApplicationController
   end
 
   def journal_params
-    params.require(:journal).permit(:title, :entry, :date, :user_id)
+    params.permit(:title, :entry, :date, :user_id)
   end
 end
