@@ -20,7 +20,7 @@ class Api::V1::JournalsController < ApplicationController
   end
 
   def update
-    byebug
+    # byebug
     @journal.update(journal_params)
     render json: @journal
   end
